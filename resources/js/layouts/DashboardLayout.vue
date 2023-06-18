@@ -14,6 +14,7 @@
             class="bg-white"
         >
             <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
+
                 <q-list padding>
                     <q-item clickable v-ripple to="/users">
                         <q-item-section avatar>
@@ -25,6 +26,19 @@
                     </q-item>
 
                 </q-list>
+
+                <q-list padding>
+                    <q-item clickable v-ripple to="/account">
+                        <q-item-section avatar>
+                            <q-icon name="account_circle" />
+                        </q-item-section>
+                        <q-item-section>
+                            Account
+                        </q-item-section>
+                    </q-item>
+
+                </q-list>
+
             </q-scroll-area>
         </q-drawer>
 
