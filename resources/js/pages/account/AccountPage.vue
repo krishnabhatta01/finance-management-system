@@ -20,26 +20,13 @@
             </template>
             <template v-slot:body-cell-actions="props">
                 <q-td :props="props">
-                    <q-btn
-                        color="primary"
-                        size="sm"
-                        round
-                        flat
-                        icon="edit"
-                        @click="
-                            () => {
-                                router.push({
-                                    path: `/account/save/${props.row.id}`,
-                                });
-                            }
-                        "
-                    />
+                    
                     <q-btn
                         color="negative"
                         size="sm"
                         round
                         flat
-                        icon="delete"
+                        icon="app_blocking"
                         @click="
                             () => {
                                 confirmDelete(props.row.id);
@@ -48,17 +35,7 @@
                     />
                 </q-td>
             </template>
-            <template v-slot:body-cell-avatar="props">
-                <q-td :props="props">
-                    <img
-                        v-if="props.row.avatar"
-                        :src="props.row.avatar"
-                        alt="avatar"
-                        style="width: 100px; height: 100px; object-fit: cover"
-                    />
-                    <span v-else>N/A</span>
-                </q-td>
-            </template>
+            
         </q-table>
     </div>
 </template>
@@ -76,15 +53,15 @@ const columns = [
         align: "left",
     },
     {
-        name: "account-holder",
+        name: "account_holder",
         label: "Account holder",
-        field: "account-holder",
+        field: "account_holder",
         align: "left",
     },
     {
-        name: "ac-no",
+        name: "ac_no",
         label: "Ac. No.",
-        field: "ac-no",
+        field: "ac_no",
         align: "left",
     },
     {
