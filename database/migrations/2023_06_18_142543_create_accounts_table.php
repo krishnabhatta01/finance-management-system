@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('Account_holder');
-            $table->integer('Ac_No');
+            $table->string('Ac_No');
             $table->integer('Balance');
             $table->integer('loan');
 
