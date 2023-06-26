@@ -3,24 +3,12 @@
         <q-table title="Account" :rows="rows" :columns="columns" row-key="name">
             <template v-slot:top-right>
                 <div class="q-pa-md q-gutter-sm">
-                    <q-btn
-                        color="primary"
-                        label="Add"
-                        icon="add"
-                        @click="
-                            () => {
-                                router.push({
-                                    path: '/account/save',
-                                });
-                            }
-                        "
-                    />
-                    <q-btn color="primary" icon="file_download" label="Pdf" />
+                    <q-btn color="primary" icon="file_download" label="Pdf" href="account/pdf" />
+                    
                 </div>
             </template>
             <template v-slot:body-cell-actions="props">
                 <q-td :props="props">
-                    
                     <q-btn
                         color="negative"
                         size="sm"
@@ -35,7 +23,6 @@
                     />
                 </q-td>
             </template>
-            
         </q-table>
     </div>
 </template>
@@ -55,25 +42,31 @@ const columns = [
     {
         name: "account_holder",
         label: "Account holder",
-        field: "account_holder",
+        field: "Account_holder",
         align: "left",
     },
     {
         name: "ac_no",
         label: "Ac. No.",
-        field: "ac_no",
+        field: "Ac_No",
         align: "left",
     },
     {
         name: "balance",
         label: "Balance",
-        field: "balance",
+        field: "Balance",
         align: "left",
     },
     {
         name: "loan",
         label: "Loan",
         field: "loan",
+        align: "left",
+    },
+    {
+        name: "status",
+        label: "Status",
+        field: "Status",
         align: "left",
     },
 ];
@@ -85,7 +78,8 @@ const fetchPage = async () => {
         rows.value = data;
     }
 };
-const confirmDelete = (id) => {
+
+/* const confirmDelete = (id) => {
     $q.dialog({
         title: "Confirm",
         message: "Are you sure to delete this user?",
@@ -110,6 +104,6 @@ const confirmDelete = (id) => {
             });
         }
     });
-};
+}; */
 fetchPage();
 </script>

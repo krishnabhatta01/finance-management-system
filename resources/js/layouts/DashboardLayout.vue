@@ -1,10 +1,13 @@
 <template>
     <q-layout view="hHh Lpr lff" container style="height: 100vh" class="shadow-2 rounded-borders">
-        <q-header elevated class="bg-blue-10">
+        <q-header elevated class="bg-blue-10 q-pa-md">
             <q-toolbar>
-                <q-toolbar-title>Simple Crud App</q-toolbar-title>
+                <q-toolbar-title>Admin panel</q-toolbar-title>
+                <q-btn  color="blue-6" round icon="logout" to="/main/login" />
             </q-toolbar>
+             
         </q-header>
+
         <q-drawer
             show-if-above
             :mini="miniState"

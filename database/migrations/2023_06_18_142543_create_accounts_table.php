@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('Ac_No');
             $table->integer('Balance');
             $table->integer('loan');
+            $table->string('Status');
 
             $table->timestamps();
         });

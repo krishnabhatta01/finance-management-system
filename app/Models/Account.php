@@ -16,5 +16,6 @@ class Account extends Model
             'Ac_No',
             'Balance',
             'loan',
+            'Status'
     ];
 }
