@@ -13,59 +13,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-     public function login(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
    
-        if($validator->fails()){
 
-            return Response(['message' => $validator->errors()],401);
-        }
-   
-        if(Auth::attempt($request->all())){
-
-            // $user = Auth::user(); 
-            $user = User::where('email',$request['email'])->firstOrFail();
-    
-            $token = $user->createToken('auth_token')->plainTextToken;
-        
-            return Response(['token' => $token],200);
-        }
-
-        return Response(['message' => 'email or password wrong'],401);
-    }
-
-   public function register(Request $request){
-    $data = $request->all();
-    $userDetails = [
-        'email' => $data['email'],
-        'password' => Hash::make($data['password']),
-    ];
-    $user = User::create($userDetails);
-
-    $token = $user->createToken('auth_token')->plainTextToken;
-
-    return response()->json([
-        'user' => $user,
-        'access_token' => $token,
-        'token_type' => 'Bearer',
-    ]);
-   }
-
-    public function logout(Request $request)
+    /* public function index()
     {
-       $request->user()->currentAccessToken()->delete();
-
-      
         
-        return $this->successResponse();
-    }
-
-    public function index()
-    {
         return $this->successResponse(User::all());
     }
 
@@ -101,16 +53,6 @@ class UserController extends Controller
         $item->delete();
         return  $this->successResponse([],"Record deleted.");
     }
-
-    public function saveFile($base64)
-    {
-        $split = explode(",",$base64);
-        $base64 = $split[1];
-        $extension = explode("/",explode(";",$split[0])[0])[1];
-        $base64 = str_replace(' ', '+', $base64);
-        $fileName = time().".".$extension;
-        $path = public_path().'/uploads/'.$fileName;
-        file_put_contents($path, base64_decode($base64));
-        return '/uploads/'.$fileName;
-    }
+ */
+    
 }

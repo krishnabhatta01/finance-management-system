@@ -9,7 +9,7 @@
                 >
                     <q-card-section class="bg-deep-purple-7">
                         <h4 class="text-h5 text-white q-my-md q-px-md">
-                            Finance Management
+                            Login
                         </h4>
                         <div
                             class="absolute-bottom-right q-pr-md"
@@ -25,7 +25,11 @@
                     </q-card-section>
 
                     <q-card-section>
-                        <q-form class="q-px-sm q-pt-xl" @submit="onSubmit" ref="formRef">
+                        <q-form
+                            class="q-px-sm q-pt-xl"
+                            @submit="onSubmit"
+                            ref="formRef"
+                        >
                             <q-input
                                 square
                                 clearable
@@ -53,17 +57,28 @@
                                 hint="Eg: sdfQ@123"
                                 lazy-rules
                                 :rules="[
-                                    (val) => 
-                                       
-                                            (val && val.length > 0) ||
-                                            'Please type something'
-                                      
+                                    (val) =>
+                                        (val && val.length > 0) ||
+                                        'Please type something',
                                 ]"
                             >
                                 <template v-slot:prepend>
                                     <q-icon name="lock" />
                                 </template>
                             </q-input>
+                            <q-card-actions class="q-px-lg">
+                                <q-btn
+                                    unelevated
+                                    size="lg"
+                                    color="purple-4"
+                                    class="full-width text-white"
+                                    label="Sign In"
+                                    type="submit"
+                                />
+                            </q-card-actions>
+                            <q-card-section class="text-center q-pa-sm">
+                                <p class="text-grey-6">Forgot your password?</p>
+                            </q-card-section>
                         </q-form>
                     </q-card-section>
 
@@ -86,21 +101,6 @@
                             </q-btn>
                         </div>
                     </q-card-section> -->
-                    <q-card-actions class="q-px-lg">
-                        <q-btn
-                            unelevated
-                            size="lg"
-                            color="purple-4"
-                            class="full-width text-white"
-                            label="Sign In"
-                            type="submit"
-                        />
-                       
-                       
-                    </q-card-actions>
-                    <q-card-section class="text-center q-pa-sm">
-                        <p class="text-grey-6">Forgot your password?</p>
-                    </q-card-section>
                 </q-card>
             </div>
         </div>
@@ -110,11 +110,13 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { ref } from "vue";
+import {useRoute, useRouter} from "vue-router";
 
 const $q = useQuasar();
 const formRef = ref(null);
 const formData = ref({});
-
+const router = useRouter()
+const route = useRoute()
 
 const onSubmit = async () => {
     if (formRef.value.validate()) {
@@ -132,7 +134,7 @@ const onSubmit = async () => {
             await router.push({
                 path: "/",
             });
-        } catch (error) {
+        } catch (err) {
             const { data } = err.response;
             $q.notify({
                 color: "red-5",
@@ -143,9 +145,7 @@ const onSubmit = async () => {
     }
 };
 
-const onReset =()=>{
-    formData.value={}
-}
-
-  
+const onReset = () => {
+    formData.value = {};
+};
 </script>

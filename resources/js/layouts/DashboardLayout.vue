@@ -1,11 +1,15 @@
 <template>
-    <q-layout view="hHh Lpr lff" container style="height: 100vh" class="shadow-2 rounded-borders">
+    <q-layout
+        view="hHh Lpr lff"
+        container
+        style="height: 100vh"
+        class="shadow-2 rounded-borders"
+    >
         <q-header elevated class="bg-blue-10 q-pa-md">
             <q-toolbar>
                 <q-toolbar-title>Admin panel</q-toolbar-title>
-                <q-btn  color="blue-6" round icon="logout" to="/main/login" />
+                <q-btn color="blue-6" round icon="logout" @click="logout" />
             </q-toolbar>
-             
         </q-header>
 
         <q-drawer
@@ -17,17 +21,13 @@
             class="bg-white"
         >
             <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
-
                 <q-list padding>
                     <q-item clickable v-ripple to="/users">
                         <q-item-section avatar>
                             <q-icon name="people" />
                         </q-item-section>
-                        <q-item-section>
-                            Users
-                        </q-item-section>
+                        <q-item-section> Users </q-item-section>
                     </q-item>
-
                 </q-list>
 
                 <q-list padding>
@@ -35,13 +35,9 @@
                         <q-item-section avatar>
                             <q-icon name="account_circle" />
                         </q-item-section>
-                        <q-item-section>
-                            Account
-                        </q-item-section>
+                        <q-item-section> Account </q-item-section>
                     </q-item>
-
                 </q-list>
-
             </q-scroll-area>
         </q-drawer>
 
@@ -53,6 +49,35 @@
     </q-layout>
 </template>
 <script setup>
-import {ref} from 'vue'
-const miniState =ref(false)
+import { ref } from "vue";
+import { useQuasar } from "quasar";
+import {useRouter} from "vue-router";
+
+const miniState = ref(false);
+const $q = useQuasar();
+const router = useRouter();
+
+const logout = async () => {
+    try {
+        const { data } = await window.axios.post(
+            `${window.baseUrl}/api/logout`
+        );
+        $q.notify({
+            color: "positive",
+            textColor: "white",
+            message: data.message,
+        });
+        if (route.params?.id) return;
+        await router.push({
+            path: "/main/login",
+        });
+    } catch (error) {
+        const { data }  = error.response;
+        $q.notify({
+            color: "red-5",
+            textColor: "white",
+            message: data.message,
+        });
+    }
+};
 </script>
