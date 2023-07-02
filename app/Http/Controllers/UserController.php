@@ -15,7 +15,7 @@ class UserController extends Controller
 
    
 
-    /* public function index()
+    public function index()
     {
         
         return $this->successResponse(User::all());
@@ -53,6 +53,6 @@ class UserController extends Controller
         $item->delete();
         return  $this->successResponse([],"Record deleted.");
     }
- */
+
     
 }

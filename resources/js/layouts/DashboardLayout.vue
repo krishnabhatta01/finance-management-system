@@ -5,10 +5,10 @@
         style="height: 100vh"
         class="shadow-2 rounded-borders"
     >
-        <q-header elevated class="bg-blue-10 q-pa-md">
+        <q-header elevated class="bg-blue-10 q-pa-sm">
             <q-toolbar>
                 <q-toolbar-title>Admin panel</q-toolbar-title>
-                <q-btn color="blue-6" round icon="logout" @click="logout" />
+                <q-btn color="white" text-color="primary" round icon="logout" @click="logout" />
             </q-toolbar>
         </q-header>
 
@@ -22,7 +22,7 @@
         >
             <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
                 <q-list padding>
-                    <q-item clickable v-ripple to="/users">
+                    <q-item clickable v-ripple to="/dashboard/users">
                         <q-item-section avatar>
                             <q-icon name="people" />
                         </q-item-section>
@@ -31,7 +31,7 @@
                 </q-list>
 
                 <q-list padding>
-                    <q-item clickable v-ripple to="/account">
+                    <q-item clickable v-ripple to="/dashboard/account">
                         <q-item-section avatar>
                             <q-icon name="account_circle" />
                         </q-item-section>
@@ -69,7 +69,7 @@ const logout = async () => {
         });
         if (route.params?.id) return;
         await router.push({
-            path: "/main/login",
+            path: "dashboard/main",
         });
     } catch (error) {
         const { data }  = error.response;

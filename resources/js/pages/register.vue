@@ -105,7 +105,7 @@
                                     rounded
                                     color="primary"
                                     label="Return to login"
-                                    to="/main/login"
+                                    to="/"
                                 />
                             </q-card-section>
                         </q-form>

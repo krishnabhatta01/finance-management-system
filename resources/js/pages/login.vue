@@ -19,7 +19,7 @@
                                 fab
                                 icon="add"
                                 color="purple-4"
-                                to="/main/register"
+                                to="/register"
                             />
                         </div>
                     </q-card-section>
@@ -132,7 +132,7 @@ const onSubmit = async () => {
             });
             if (route.params?.id) return;
             await router.push({
-                path: "/",
+                path: "dashboard/main",
             });
         } catch (err) {
             const { data } = err.response;

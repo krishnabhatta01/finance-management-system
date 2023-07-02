@@ -10,38 +10,38 @@ import register from "../pages/register.vue";
 
 const routes = [
     {
-        path: "/",
+        path: "/dashboard",
         component: DashboardLayout,
         children: [
             {
-                path: "",
+                path: "main",
                 component: Dashboard,
             },
             {
-                path: "/users",
+                path: "users",
                 component: UsersPage,
             },
             {
-                path: "/users/save",
+                path: "users/save",
                 component: UserForm,
             },
             {
-                path: "/users/save/:id",
+                path: "users/save/:id",
                 component: UserForm,
             },
             {
-                path: "/account",
+                path: "account",
                 component: AccountPage,
             },
         ],
     },
 
     {
-        path: "/main",
+        path: "/",
         component: logLayout,
         children: [
             {
-                path: "login",
+                path: "",
                 component: login,
             },
             {

@@ -49,7 +49,7 @@
                 <q-btn label="Submit" type="submit" color="primary"/>
                 <q-btn label="Back"  color="black" flat class="q-ml-sm" @click="()=>{
                     router.push({
-                        path: '/users'
+                        path: '/dashboard/users'
                     })
                 }" />
             </div>
