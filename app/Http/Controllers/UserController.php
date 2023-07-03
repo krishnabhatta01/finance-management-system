@@ -36,8 +36,10 @@ class UserController extends Controller
             "email"=>$fields["email"],
             "role"=>$fields["role"],
         ];
+      
         if(@$request->avatar && str_contains($request->avatar,"base64")){
-            $setFields["avatar"] = $this->saveFile($request->avatar);
+            $setFields["avatar"] = $this->saveFile($request->avatar); 
+           
         }
         if(isset($fields["password"])) $setFields["password"] = bcrypt($fields["password"]);
         $item = User::updateOrCreate([
@@ -54,5 +56,16 @@ class UserController extends Controller
         return  $this->successResponse([],"Record deleted.");
     }
 
+    public function saveFile($base64)
+    {
+        $split = explode(",", $base64);
+        $base64 = $split[1];
+        $extension = explode("/", explode(";", $split[0])[0])[1];
+        $base64 = str_replace(' ', '+', $base64);
+        $fileName = time() . "." . $extension;
+        $path = public_path() . '/uploads/' . $fileName;
+        file_put_contents($path, base64_decode($base64));
+        return '/uploads/' . $fileName;
+    }
     
 }

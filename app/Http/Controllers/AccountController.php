@@ -16,7 +16,7 @@ class AccountController extends Controller
         return $this->successResponse(Account::all());
     }
 
-    public function save(Request $request)
+    /* public function save(Request $request)
     {
         $fields = $request->validated();
         $setFields = [
@@ -40,5 +40,5 @@ class AccountController extends Controller
         if (!$item) return $this->errorResponse([], "Failed to delete.");
         $item->delete();
         return  $this->successResponse([], "Record deleted.");
-    }
+    } */
 }

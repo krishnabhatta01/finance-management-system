@@ -1,25 +1,36 @@
 <template>
-    <q-layout
-        view="hHh Lpr lff"
-        container
-        style="height: 100vh"
-        class="shadow-2 rounded-borders"
-    >
+    <q-layout view="hHh Lpr lff" container style="height: 100vh" class="shadow-2 rounded-borders">
         <q-header elevated class="bg-blue-10 q-pa-sm">
             <q-toolbar>
+
                 <q-toolbar-title>Admin panel</q-toolbar-title>
-                <q-btn color="white" text-color="primary" round icon="logout" @click="logout" />
+
+                <div class="q-pa-sm">
+                    <q-btn-dropdown color="white" text-color="black" dropdown-icon="person">
+                        <q-list class="q-pa-lg">
+                            <img :src="profile.avatar" alt="profile"
+                                style="width:70px; border-radius: 50%; text-align: center; display: flex; align-items: center; justify-content: center;">
+                            <q-item-label style="color:rgba(0, 0, 255, 0.589); font-size: 24px;">{{ profile.name
+                            }}</q-item-label>
+                            <hr>
+                            <q-item clickable v-close-popup @click="logout">
+                                <q-item-section>
+                                    <q-item-label>Logout</q-item-label>
+                                </q-item-section>
+                            </q-item>
+
+                        </q-list>
+                    </q-btn-dropdown>
+                </div>
+
+
+
+
             </q-toolbar>
+
         </q-header>
 
-        <q-drawer
-            show-if-above
-            :mini="miniState"
-            :width="200"
-            :breakpoint="500"
-            bordered
-            class="bg-white"
-        >
+        <q-drawer show-if-above :mini="miniState" :width="200" :breakpoint="500" bordered class="bg-white">
             <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
                 <q-list padding>
                     <q-item clickable v-ripple to="/dashboard/users">
@@ -27,6 +38,7 @@
                             <q-icon name="people" />
                         </q-item-section>
                         <q-item-section> Users </q-item-section>
+
                     </q-item>
                 </q-list>
 
@@ -51,11 +63,16 @@
 <script setup>
 import { ref } from "vue";
 import { useQuasar } from "quasar";
-import {useRouter} from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const miniState = ref(false);
+const profile = ref([]);
+
+
+
 const $q = useQuasar();
 const router = useRouter();
+const route = useRoute();
 
 const logout = async () => {
     try {
@@ -69,10 +86,10 @@ const logout = async () => {
         });
         if (route.params?.id) return;
         await router.push({
-            path: "dashboard/main",
+            path: "/",
         });
     } catch (error) {
-        const { data }  = error.response;
+        const { data } = error.response;
         $q.notify({
             color: "red-5",
             textColor: "white",
@@ -80,4 +97,14 @@ const logout = async () => {
         });
     }
 };
+
+async function fetchPage() {
+    const res = await fetch(`${window.baseUrl}/api/profile`);
+    const data = await res.json();
+    profile.value = data;
+}
+fetchPage()
+
+
 </script>
+

@@ -21,8 +21,17 @@ class DatabaseSeeder extends Seeder
             'avatar' => $faker->image,
             'name' => $faker->firstName,
             'email' => $faker->email,
+            'role' => 'admin',
+            'password' => 123456789,
+            
+        ]);
+
+        \App\Models\User::factory()->create([
+            'avatar' => $faker->image,
+            'name' => $faker->firstName,
+            'email' => $faker->email,
             'role' => 'Customer',
-            'password' => $faker->password,
+            'password' => 123456789,
             
         ]);
     }
