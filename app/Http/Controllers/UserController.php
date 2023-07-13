@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-   
+
 
     public function index()
     {
-        
+
         return $this->successResponse(User::all());
     }
 
     public function show($id)
     {
         $item = User::find($id);
-        if(!$item) return $this->errorResponse([],"Record not found.");
+        if (!$item) return $this->errorResponse([], "Record not found.");
         return $this->successResponse($item);
     }
 
@@ -32,28 +32,27 @@ class UserController extends Controller
     {
         $fields = $request->validated();
         $setFields = [
-            "name"=>$fields["name"],
-            "email"=>$fields["email"],
-            "role"=>$fields["role"],
+            "name" => $fields["name"],
+            "email" => $fields["email"],
+            "role" => $fields["role"],
         ];
-      
-        if(@$request->avatar && str_contains($request->avatar,"base64")){
-            $setFields["avatar"] = $this->saveFile($request->avatar); 
-           
+
+        if (@$request->avatar && str_contains($request->avatar, "base64")) {
+            $setFields["avatar"] = $this->saveFile($request->avatar);
         }
-        if(isset($fields["password"])) $setFields["password"] = bcrypt($fields["password"]);
+        if (isset($fields["password"])) $setFields["password"] = bcrypt($fields["password"]);
         $item = User::updateOrCreate([
-            "id"=>$fields["id"] ?? null
-        ],$setFields);
+            "id" => $fields["id"] ?? null
+        ], $setFields);
         return $this->successResponse($item);
     }
 
     public function delete($id)
     {
         $item = User::find($id);
-        if(!$item) return $this->errorResponse([],"Failed to delete.");
+        if (!$item) return $this->errorResponse([], "Failed to delete.");
         $item->delete();
-        return  $this->successResponse([],"Record deleted.");
+        return  $this->successResponse([], "Record deleted.");
     }
 
     public function saveFile($base64)
@@ -67,5 +66,4 @@ class UserController extends Controller
         file_put_contents($path, base64_decode($base64));
         return '/uploads/' . $fileName;
     }
-    
 }

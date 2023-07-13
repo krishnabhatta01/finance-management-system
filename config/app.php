@@ -169,6 +169,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+
+        /* Spatie */
+        Spatie\Permission\PermissionServiceProvider::class,
     ])->toArray(),
 
     /*

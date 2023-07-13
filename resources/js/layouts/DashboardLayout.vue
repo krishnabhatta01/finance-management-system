@@ -50,6 +50,25 @@
                         <q-item-section> Account </q-item-section>
                     </q-item>
                 </q-list>
+
+                <q-list padding>
+                    <q-item clickable v-ripple to="/dashboard/roles">
+                        <q-item-section avatar>
+                            <q-icon name="manage_accounts" />
+                        </q-item-section>
+                        <q-item-section> Roles </q-item-section>
+                    </q-item>
+                </q-list>
+                
+                <q-list padding>
+                    <q-item clickable v-ripple to="/dashboard/permissions">
+                        <q-item-section avatar>
+                            <q-icon name="admin_panel_settings" />
+                        </q-item-section>
+                        <q-item-section> Permissions </q-item-section>
+                    </q-item>
+                </q-list>
+                
             </q-scroll-area>
         </q-drawer>
 
