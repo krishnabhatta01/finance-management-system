@@ -6,47 +6,62 @@ import AccountPage from "../pages/account/AccountPage.vue";
 
 import logLayout from "../layouts/logLayout.vue";
 import login from "../pages/login.vue";
-import register from "../pages/register.vue";
+import Register from "../pages/register.vue";
+import Roles from '../pages/roles/RolePage.vue';
+import Permissions from '../pages/permissions/PermissionsPage.vue';
+import RoleForm from '../pages/roles/RoleForm.vue'; 
 
 const routes = [
     {
-        path: "/",
+        path: "/dashboard",
         component: DashboardLayout,
         children: [
             {
-                path: "",
+                path: "main",
                 component: Dashboard,
             },
             {
-                path: "/users",
+                path: "users",
                 component: UsersPage,
             },
             {
-                path: "/users/save",
+                path: "users/save",
                 component: UserForm,
             },
             {
-                path: "/users/save/:id",
+                path: "users/save/:id",
                 component: UserForm,
             },
             {
-                path: "/account",
+                path: "account",
                 component: AccountPage,
+            },
+            {
+                path: "roles",
+                component: Roles,
+            },
+            {
+                path: "roles/save",
+                component: RoleForm,
+            },
+            {
+                path: "permissions",
+                component: Permissions,
             },
         ],
     },
 
     {
-        path: "/main",
+        path: "/",
         component: logLayout,
         children: [
             {
-                path: "login",
+                path: "",
                 component: login,
             },
             {
                 path: "register",
-                component: register,
+                component: Register,
             },
         ],
     },

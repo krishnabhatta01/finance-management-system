@@ -13,7 +13,7 @@
                     icon="add"
                     @click="()=>{
                         router.push({
-                            path:'/users/save'
+                            path:'users/save'
                         })
                     }"
                 />
@@ -28,7 +28,7 @@
                         icon="edit"
                         @click="()=>{
                             router.push({
-                                path:`/users/save/${props.row.id}`
+                                path:`users/save/${props.row.id}`
                             })
                         }"
                     />
@@ -44,7 +44,7 @@
             </template>
             <template v-slot:body-cell-avatar=props>
                 <q-td :props="props">
-                  <img v-if="props.row.avatar" :src="props.row.avatar" alt="avatar" style="width: 100px;height: 100px;object-fit: cover;"/>
+                  <img v-if="props.row.avatar" :src="props.row.avatar" alt="avatar" style="width: 50px;height: 50px;object-fit: cover;"/>
                     <span v-else>N/A</span>
                 </q-td>
             </template>
@@ -96,7 +96,9 @@ const columns=[
     },
 
 ];
-const rows=ref([])
+
+const rows = ref([])
+
 const fetchPage=async ()=>{
     const res = await fetch(`${window.baseUrl}/api/users`)
     const { success,data } = await  res.json();
