@@ -21,4 +21,18 @@ class PermissionsController extends Controller
         $item->delete();
         return  $this->successResponse([], "Record deleted.");
     }
+
+    public function save(Request $request)
+    {
+        $fields = $request->validated();
+        $setFields = [
+            "name" => $fields["name"],
+
+        ];
+
+        $item = Permission::updateOrCreate([
+            "id" => $fields["id"] ?? null
+        ], $setFields);
+        return $this->successResponse($item);
+    }
 }

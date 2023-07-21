@@ -1,54 +1,87 @@
 <template>
-    <div class="q-pa-md q-gutter-sm">
+  <div class="q-pa-md" style="max-width: 400px">
+    <div>Create roles</div>
 
+    <q-form ref="formRef" @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+      <q-input
+        filled
+        v-model="formData.name"
+        label="Role *"
+        lazy-rules
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
+      />
 
-        <q-dialog v-model="layout" no-esc-dismiss no-backdrop-dismiss>
-            <q-layout view="Lhh lpR fff" container class="bg-white text-dark">
-                <h4 class="flex">Create Roles </h4>
-                <div class="q-pa-md" style="max-width: 400px">
-                    <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-                        <q-input filled v-model="name" label="Your name *" hint="Name and surname" lazy-rules
-                            :rules="[val => val && val.length > 0 || 'Please type something']" />
-
-                        <div>
-                            <q-btn label="Submit" type="submit" color="primary" />
-                            <q-btn label="Cancel" to="/dashboard/roles" color="primary" />
-                        
-                        </div>
-                    </q-form>
-                </div>
-            </q-layout>
-        </q-dialog>
-    </div>
+      <div>
+        <q-btn label="Submit" type="submit" color="primary" />
+        <q-btn
+          label="Back"
+          color="black"
+          flat
+          class="q-ml-sm"
+          @click="
+            () => {
+              router.push({
+                path: '/dashboard/roles',
+              });
+            }
+          "
+        />
+      </div>
+    </q-form>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useQuasar } from 'quasar'
+import { useQuasar } from "quasar";
+import { onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-const layout = ref(true);
-const name = ref(null);
-const $q = useQuasar()
+const formRef = ref(null);
 
-const onSubmit = () => {
-    if (accept.value !== true) {
-        $q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: 'You need to accept the license and terms first'
-        })
+const $q = useQuasar();
+const formData = ref({});
+const router = useRouter();
+const route = useRoute();
+
+const onSubmit = async () => {
+  if (formRef.value.validate()) {
+    try {
+      const { data } = await window.axios.post(
+        `${window.baseUrl}/api/roles/`,
+        formData.value
+      );
+      $q.notify({
+        color: "positive",
+        textColor: "white",
+        message: data.message,
+      });
+      if (route.params?.id) return;
+      await router.push({
+        path: "/dashboard/roles",
+      });
+    } catch (err) {
+      const { data } = err.response;
+      $q.notify({
+        color: "red-5",
+        textColor: "white",
+        message: data.message,
+      });
     }
-    else {
-        $q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Submitted'
-        })
-    }
+  }
 };
+const onReset = () => {
+  formData.value = {};
+};
+// const fetchUser = async () => {
+//   const { data } = await window.axios.get(
+//     `${window.baseUrl}/api/users/${route.params.id}`
+//   );
 
+//   formData.value = data.data;
+// };
+// onMounted(() => {
+//   if (route.params?.id) {
+//     fetchUser(route.params?.id);
+//   }
+// });
 </script>
-
-

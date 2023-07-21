@@ -72,7 +72,7 @@ const onReset = () => {
 }
 const fetchUser = async () => {
     const { data } = await window.axios.get(`${window.baseUrl}/api/users/${route.params.id}`)
-   
+
     formData.value = data.data
 }
 onMounted(() => {
@@ -80,4 +80,5 @@ onMounted(() => {
         fetchUser(route.params?.id)
     }
 })
+
 </script>

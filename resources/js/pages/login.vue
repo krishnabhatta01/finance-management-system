@@ -4,11 +4,11 @@
             <div class="row">
                 <q-card
                     square
-                    class="shadow-24"
+                    class="shadow-2"
                     style="width: 300px; height: 495px"
                 >
-                    <q-card-section class="bg-deep-purple-7">
-                        <h4 class="text-h5 text-white q-my-md q-px-md">
+                    <q-card-section class="bg-blue-3">
+                        <h4 class="text-h5 text-white q-my-md q-px-md " >
                             Login
                         </h4>
                         <div

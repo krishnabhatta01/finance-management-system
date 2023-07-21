@@ -4,11 +4,11 @@
             <div class="row">
                 <q-card
                     square
-                    class="shadow-24"
+                    class="shadow-2"
                     style="width: 300px; height: 500px"
                 >
                     <q-card-section
-                        class="bg-deep-purple-7"
+                        class="bg-blue-3"
                         style="width: 300px; height: 80px"
                     >
                         <h4 class="text-h5 text-white q-my-md absolute-center">

@@ -19,7 +19,8 @@ class ProfileController extends Controller
             'name' => $name,
             'avatar' => $profilePicture,
         ]);
-        
+
+
     }
 
 }
