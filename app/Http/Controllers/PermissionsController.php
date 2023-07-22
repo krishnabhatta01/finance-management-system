@@ -33,6 +33,7 @@ class PermissionsController extends Controller
         $item = Permission::updateOrCreate([
             "id" => $fields["id"] ?? null
         ], $setFields);
+
         return $this->successResponse($item);
     }
 }

@@ -16,11 +16,11 @@ class RoleRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'id' => 'nullable',
             "name"=>"required|min:4",
-
         ];
-
+        if($this->request->has('id')){
+            $rules["id"]="required|exists:roles,id";
+        }
         return $rules;
     }
 }

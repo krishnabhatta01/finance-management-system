@@ -9,7 +9,8 @@ import login from "../pages/login.vue";
 import Register from "../pages/register.vue";
 import Roles from '../pages/roles/RolePage.vue';
 import Permissions from '../pages/permissions/PermissionsPage.vue';
-import RoleForm from '../pages/roles/RoleForm.vue'; 
+import RoleForm from '../pages/roles/RoleForm.vue';
+import PermissionsForm from'../pages/permissions/PermissionsForm.vue'
 
 const routes = [
     {
@@ -47,6 +48,10 @@ const routes = [
             {
                 path: "permissions",
                 component: Permissions,
+            },
+            {
+                path: "permissions/save",
+                component: PermissionsForm,
             },
         ],
     },

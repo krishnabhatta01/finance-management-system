@@ -28,11 +28,11 @@ class RolesController extends Controller
         $setFields = [
             "name" => $fields["name"],
         ];
-
         $item = Role::updateOrCreate([
             "id" => $fields["id"] ?? null
         ], $setFields);
         return $this->successResponse($item);
     }
+
 
 }

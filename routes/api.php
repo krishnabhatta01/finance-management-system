@@ -33,7 +33,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
     Route::controller(RolesController::class)->prefix('roles')->group(function () {
         Route::get('/', 'index');
-        // Route::get('{id}', 'show');
+        Route::get('{id}', 'show');
+
         Route::post('/', 'save');
         Route::delete('/{id}', 'delete');
     });
